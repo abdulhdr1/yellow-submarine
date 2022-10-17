@@ -1,44 +1,25 @@
-import { Component, For } from "solid-js";
+import { createResource, ErrorBoundary, For, Show, Suspense } from "solid-js";
+import { useRouteData } from "solid-start";
+import { api } from "~/services/api";
 
-const readList: { author: string; title: string; href: string }[] = [
-  {
-    author: "harvard business review",
-    title: "the new new product development game",
-    href: "https://hbr.org/1986/01/the-new-new-product-development-game",
-  },
-  {
-    href: "https://graydon2.dreamwidth.org/193447.html",
-    author: "graydon2",
-    title: "always bet on text",
-  },
-  {
-    author: "wait but why (tim urban)",
-    href: "https://waitbutwhy.com/2019/08/story-of-us.html",
-    title: "story of us",
-  },
-  {
-    href: "https://overreacted.io/npm-audit-broken-by-design/",
-    author: "dan abramov",
-    title: "npm audit critique",
-  },
-  {
-    author: "joy liuzzo",
-    href: "https://stackoverflow.blog/2022/08/04/great-engineering-cultures-are-built-on-social-learning-communities/",
-    title: "social learning communities",
-  },
-  {
-    href: "https://stackoverflow.blog/2022/04/07/you-should-be-reading-academic-computer-science-papers/",
-    author: "ryan donovan",
-    title: "you should be reading academic computer science papers",
-  },
-  {
-    title: "the defining decade",
-    href: "https://www.goodreads.com/book/show/40603783-the-defining-decade",
-    author: "meg jay",
-  },
-];
+type Read = {
+  title: string;
+  author: string;
+  link: string;
+  platform: string;
+};
+
+export function routeData() {
+  const [reads] = createResource(async () => {
+    const { data } = await api().get("/api/read");
+    return data as { allReads: Read[] };
+  });
+  return { reads };
+}
 
 export default function ReadPage() {
+  const { reads } = useRouteData<typeof routeData>();
+  console.log(reads);
   return (
     <div class="flex h-full w-full flex-wrap items-center justify-around text-center">
       <div class="w-full border-b-2 border-dashed border-slate-900 pb-6">
@@ -50,11 +31,20 @@ export default function ReadPage() {
         </p>
       </div>
       <div class="w-full">
-        <For each={readList}>
-          {(entry) => (
-            <Item title={entry.title} author={entry.author} href={entry.href} />
-          )}
-        </For>
+        <Suspense fallback={<div>Loading</div>}>
+          <ErrorBoundary fallback={<div>Something went wrong</div>}>
+            <For each={reads()?.allReads}>
+              {({ title, author, link, platform }) => (
+                <Item
+                  title={title}
+                  author={author}
+                  link={link}
+                  platform={platform}
+                />
+              )}
+            </For>
+          </ErrorBoundary>
+        </Suspense>
       </div>
     </div>
   );
@@ -63,15 +53,17 @@ export default function ReadPage() {
 function Item({
   title,
   author,
-  href,
+  link,
+  platform,
 }: {
   title: string;
   author: string;
-  href: string;
+  link: string;
+  platform?: string;
 }) {
   return (
     <a
-      href={href}
+      href={link}
       class="group my-4 flex w-full items-center justify-between  rounded-lg font-bold duration-500 hover:bg-gray-800/20 dark:hover:bg-gray-800 sm:p-2 sm:px-4"
       target="_blank"
       rel="noreferrer noopener"
@@ -83,7 +75,7 @@ function Item({
           {title}
         </h2>
         <h3 class="prose prose-gray text-lg dark:text-gray-400">
-          by: {author}
+          by {author} <Show when={platform}> on {platform}</Show>
         </h3>
       </div>
     </a>

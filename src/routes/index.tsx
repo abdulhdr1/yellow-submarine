@@ -1,5 +1,5 @@
 import { GridItem } from "../components/GridItem";
-import bgImg from "../../public/bg.jpg";
+import bgImg from "../assets/bg.jpg";
 import { FaSolidInfo } from "solid-icons/fa";
 
 export default function IndexPage() {

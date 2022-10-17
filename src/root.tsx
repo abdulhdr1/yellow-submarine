@@ -22,7 +22,7 @@ export default function Root() {
         <Title>Abdul Haidar</Title>
         <Meta charset="utf-8" />
         <Meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="shortcut icon" type="image/ico" href="/public/favicon.ico" />
+        <link rel="shortcut icon" type="image/ico" href="/favicon.ico" />
       </Head>
       <Body>
         <Suspense>
