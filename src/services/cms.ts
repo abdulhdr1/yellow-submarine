@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export async function request(query) {
+export async function request(query: string) {
   const client = axios.create({
     baseURL: import.meta.env.VITE_APP_CMS_URL,
     headers: {
@@ -8,5 +8,9 @@ export async function request(query) {
     },
   });
 
-  return client.post("/", { query });
+  client.interceptors.response.use((response) => {
+    return response.data.data;
+  });
+
+  return client.post<any, any>("/", { query });
 }

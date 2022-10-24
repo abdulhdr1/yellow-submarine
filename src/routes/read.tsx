@@ -1,6 +1,7 @@
-import { createResource, ErrorBoundary, For, Show, Suspense } from "solid-js";
+import { ErrorBoundary, For, Show, Suspense } from "solid-js";
 import { useRouteData } from "solid-start";
-import { api } from "~/services/api";
+import { createServerData$ } from "solid-start/server";
+import { request } from "~/services/cms";
 
 type Read = {
   title: string;
@@ -8,18 +9,27 @@ type Read = {
   link: string;
   platform: string;
 };
+const query = `
+    {
+      allReads {
+        title
+        author
+        platform
+        link
+      }
+    }
+  `;
 
 export function routeData() {
-  const [reads] = createResource(async () => {
-    const { data } = await api().get("/api/read");
-    return data as { allReads: Read[] };
+  return createServerData$(async () => {
+    const { allReads } = await request(query);
+    return allReads as Read[];
   });
-  return { reads };
 }
 
 export default function ReadPage() {
-  const { reads } = useRouteData<typeof routeData>();
-  console.log(reads);
+  const reads = useRouteData<typeof routeData>();
+
   return (
     <div class="flex h-full w-full flex-wrap items-center justify-around text-center">
       <div class="w-full border-b-2 border-dashed border-slate-900 pb-6">
@@ -33,7 +43,7 @@ export default function ReadPage() {
       <div class="w-full">
         <Suspense fallback={<div>Loading</div>}>
           <ErrorBoundary fallback={<div>Something went wrong</div>}>
-            <For each={reads()?.allReads}>
+            <For each={reads()}>
               {({ title, author, link, platform }) => (
                 <Item
                   title={title}
