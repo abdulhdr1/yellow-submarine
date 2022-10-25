@@ -38,14 +38,14 @@ export default function IndexPage() {
       >
         <GridItem path={"/read"}>
           <h3 class={`text-yellow text-lg font-bold`}>What I like (to read)</h3>
-          books and articles that i found interesting or learned something from
-          and would like to share
+          Books and articles that I found interesting and/or learned something
+          from and would like to share
         </GridItem>
         <GridItem path={"/watched"}>
           <h3 class={`text-yellow text-lg font-bold `}>
             What I like (to watch)
           </h3>
-          same as read, but for videos, courses and movies (probably should be
+          Same as read, but for videos, courses and movies (should probably be
           the same list)
         </GridItem>
 
@@ -53,26 +53,29 @@ export default function IndexPage() {
           <h3 class="text-yellow text-lg font-bold">
             Material I rely on (to study)
           </h3>
-          git repos, books, videos, courses related to computer science and
-          programming that i use as my studying guides
+          Repos, books, videos, courses related to computer science and
+          programming that I use as my studying guides
         </GridItem>
         <GridItem path="https://github.com/abdulhdr1/website">
           <h3 class="text-yellow justify-center  text-lg font-bold">
             How I built this (code)
           </h3>
           <ul class="grid grid-cols-2">
-            <li>solid-js</li>
-            <li>tailwind</li>
-            <li>hyper ui</li>
+            <li>SolidJS (SolidStart)</li>
+            <li>TailwindCSS</li>
+            <li>GraphQL</li>
+            <li>HyperUI</li>
+            <li>DatoCMS</li>
+            <li>Vercel</li>
           </ul>
         </GridItem>
         <div class="group absolute bottom-0 right-2 overflow-hidden">
-          <div class="bg-yellow relative -right-[91%]  flex items-center rounded-tl-xl pt-[2px] pl-2 transition-all duration-700 group-hover:right-0">
+          <div class="bg-yellow relative -right-[93%]  flex items-center rounded-tl-xl pt-[2px] pl-2 transition-all duration-700 group-hover:right-0">
             <span class="flex h-4 w-4 items-center justify-center rounded-full p-2 font-extrabold">
               <FaSolidInfo />
             </span>
             <span>
-              bg-photo by{" "}
+              background photo by{" "}
               <a
                 rel="noreferrer noopener"
                 href="https://unsplash.com/@charlotablunarova"
