@@ -1,5 +1,5 @@
 import { ErrorBoundary, For, Show, Suspense } from "solid-js";
-import { useRouteData } from "solid-start";
+import { RouteDataArgs, useRouteData } from "solid-start";
 import { createServerData$ } from "solid-start/server";
 import { request } from "~/services/cms";
 
@@ -10,17 +10,17 @@ type Read = {
   platform: string;
 };
 const query = `
-    {
-      allReads {
-        title
-        author
-        platform
-        link
-      }
+  {
+    allReads {
+      title
+      author
+      platform
+      link
     }
-  `;
+  }
+`;
 
-export function routeData() {
+export function routeData({ params }: RouteDataArgs) {
   return createServerData$(async () => {
     const { allReads } = await request(query);
     return allReads as Read[];
@@ -32,12 +32,12 @@ export default function ReadPage() {
 
   return (
     <div class="flex h-full w-full flex-wrap items-center justify-around text-center">
-      <div class="w-full border-b-2 border-dashed border-slate-900 pb-6">
+      <div class="w-full  border-dashed border-slate-900 pb-6">
         <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-300">
-          thing's i liked to read
+          Things I liked to read
         </h1>
         <p class="text-base font-bold text-gray-800 dark:text-gray-400">
-          this list is appended constantly
+          This list is appended constantly
         </p>
       </div>
       <div class="w-full">
@@ -80,12 +80,22 @@ function Item({
     >
       <div class="text-start">
         <h2
-          class={`prose font-bold text-gray-800 dark:text-gray-300 sm:prose-xl`}
+          class={`prose font-bold text-gray-900 dark:text-gray-200 sm:prose-xl`}
         >
           {title}
         </h2>
-        <h3 class="prose prose-gray text-lg dark:text-gray-400">
-          by {author} <Show when={platform}> on {platform}</Show>
+        <h3 class="prose prose-gray prose-sm dark:text-gray-400">
+          by{" "}
+          <span class="prose-lg text-gray-800 dark:text-gray-300">
+            {author}
+          </span>{" "}
+          <Show when={platform}>
+            {" "}
+            on{" "}
+            <span class="prose-lg text-gray-800 dark:text-gray-300">
+              {platform}
+            </span>
+          </Show>
         </h3>
       </div>
     </a>

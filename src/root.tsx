@@ -11,11 +11,14 @@ import {
   Routes,
   Scripts,
   Title,
+  useIsRouting,
 } from "solid-start";
 import { Header } from "./components/Header";
 import "./root.css";
 
 export default function Root() {
+  const isRouting = useIsRouting();
+
   return (
     <Html lang="en">
       <Head>
@@ -27,10 +30,12 @@ export default function Root() {
       <Body>
         <Suspense>
           <ErrorBoundary>
-            <div class="flex min-h-screen flex-col justify-between bg-amber-400 dark:bg-slate-900">
+            <div
+              class={`flex min-h-screen flex-col justify-between bg-amber-400 dark:bg-slate-900`}
+            >
               <div class="relative mx-auto w-full max-w-3xl px-4 text-gray-200 lg:px-6 2xl:mx-auto">
                 <Header />
-                <div class="m-6  mx-auto">
+                <div class={`m-6  mx-auto ${isRouting() ? "opacity-60" : ""}`}>
                   <section>
                     <Routes>
                       <FileRoutes />
