@@ -16,6 +16,10 @@ export default function IndexPage() {
                 complex interfaces
               </li>
               <li>Optimizing my iteration cycles</li>
+              <li>
+                This website, current state: working on adding the watch and did
+                sections pages and filters/search
+              </li>
             </ul>
           </div>
           <div class="prose prose-invert w-full rounded-lg border-2 bg-slate-900 p-4">
@@ -53,8 +57,8 @@ export default function IndexPage() {
           <h3 class="text-yellow text-lg font-bold">
             Material I rely on (to study)
           </h3>
-          Repos, books, videos, courses related to computer science and
-          programming that I use as my studying guides
+          Repos, books, videos, courses related to computer science, enterprise,
+          project management, design or career that I use as my guides
         </GridItem>
         <GridItem path="https://github.com/abdulhdr1/website">
           <h3 class="text-yellow justify-center  text-lg font-bold">
