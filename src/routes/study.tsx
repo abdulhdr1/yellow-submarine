@@ -1,7 +1,8 @@
-import { ErrorBoundary, For, Show, Suspense } from "solid-js";
-import { RouteDataArgs, useRouteData } from "solid-start";
+import { For, Show } from "solid-js";
+import { ErrorBoundary, RouteDataArgs, useRouteData } from "solid-start";
 import { createServerData$ } from "solid-start/server";
 import { request } from "~/services/cms";
+import { gql } from "@solid-primitives/graphql";
 
 type Study = {
   title: string;
@@ -9,28 +10,23 @@ type Study = {
   link: string;
   tag: string[];
 };
-const query = `
-{
-  allStudies (first: 50) {
-    title
-    link
-    description
-    tag
+const query = gql`
+  {
+    allStudies(first: 50) {
+      title
+      link
+      description
+      tag
+    }
   }
-}
-
 `;
 
 export function routeData({ params }: RouteDataArgs) {
-  return createServerData$(async () => {
-    const { allStudies } = await request(query);
-    return allStudies as Study[];
-  });
+  return createServerData$<{ allStudies: Study[] }>(() => request(query));
 }
 
 export default function StudyPage() {
   const study = useRouteData<typeof routeData>();
-
   return (
     <div class="flex h-full w-full flex-wrap items-center justify-around text-center">
       <div class="w-full  border-dashed border-slate-900 pb-6">
@@ -45,20 +41,18 @@ export default function StudyPage() {
         </p>
       </div>
       <div class="w-full">
-        <Suspense fallback={<div>Loading</div>}>
-          <ErrorBoundary fallback={<div>Something went wrong</div>}>
-            <For each={study()}>
-              {({ title, description, link, tag }) => (
-                <Item
-                  title={title}
-                  description={description}
-                  link={link}
-                  tag={tag}
-                />
-              )}
-            </For>
-          </ErrorBoundary>
-        </Suspense>
+        <ErrorBoundary fallback={() => <div>Something went wrong</div>}>
+          <For each={study()?.allStudies}>
+            {({ title, description, link, tag }) => (
+              <Item
+                title={title}
+                description={description}
+                link={link}
+                tag={tag}
+              />
+            )}
+          </For>
+        </ErrorBoundary>
       </div>
     </div>
   );

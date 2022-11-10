@@ -21,9 +21,10 @@ export function GridItem(props: props) {
     if (props.static)
       return (
         <div
-          class={`block rounded-xl border-2  border-gray-900 p-4 transition ${
-            elClass ?? ""
-          }`}
+          classList={{
+            elClass: elClass?.length > 0,
+            "block rounded-xl border-2  border-gray-900 p-4 transition": true,
+          }}
         >
           {children}
         </div>

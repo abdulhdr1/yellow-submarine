@@ -1,5 +1,5 @@
-import { ErrorBoundary, For, Show, Suspense } from "solid-js";
-import { RouteDataArgs, useRouteData } from "solid-start";
+import { For } from "solid-js";
+import { ErrorBoundary, RouteDataArgs, useRouteData } from "solid-start";
 import { createServerData$ } from "solid-start/server";
 import { request } from "~/services/cms";
 
@@ -21,15 +21,11 @@ const query = `
 `;
 
 export function routeData({ params }: RouteDataArgs) {
-  return createServerData$(async () => {
-    const { allReads } = await request(query);
-    return allReads as Read[];
-  });
+  return createServerData$<{ allReads: Read[] }>(() => request(query));
 }
 
 export default function ReadPage() {
   const reads = useRouteData<typeof routeData>();
-
   return (
     <div class="flex h-full w-full flex-wrap items-center justify-around text-center">
       <div class="w-full  border-dashed border-slate-900 pb-6">
@@ -41,20 +37,18 @@ export default function ReadPage() {
         </p>
       </div>
       <div class="w-full">
-        <Suspense fallback={<div>Loading</div>}>
-          <ErrorBoundary fallback={<div>Something went wrong</div>}>
-            <For each={reads()}>
-              {({ title, author, link, platform }) => (
-                <Item
-                  title={title}
-                  author={author}
-                  link={link}
-                  platform={platform}
-                />
-              )}
-            </For>
-          </ErrorBoundary>
-        </Suspense>
+        <ErrorBoundary fallback={() => <div>Something went wrong</div>}>
+          <For each={reads()?.allReads}>
+            {({ title, author, link, platform }) => (
+              <Item
+                title={title}
+                author={author}
+                link={link}
+                platform={platform}
+              />
+            )}
+          </For>
+        </ErrorBoundary>
       </div>
     </div>
   );
