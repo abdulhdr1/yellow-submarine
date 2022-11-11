@@ -1,4 +1,4 @@
-import { useMatch, useNavigate } from "solid-start";
+import { A, useMatch, useNavigate } from "solid-start";
 import { JSXElement } from "solid-js";
 
 interface ButtonProps {
@@ -11,7 +11,7 @@ export function HeaderLink(props: ButtonProps) {
   const match = useMatch(() => props.link);
 
   return (
-    <a
+    <A
       class={`rounded-lg  p-2 font-bold text-slate-900 transition-all duration-500   hover:bg-gray-800/20 dark:text-gray-300  dark:hover:bg-gray-800 sm:p-3 ${props.class}`}
       href={props.link}
     >
@@ -23,6 +23,6 @@ export function HeaderLink(props: ButtonProps) {
             : "border-transparent"
         }`}
       />
-    </a>
+    </A>
   );
 }
