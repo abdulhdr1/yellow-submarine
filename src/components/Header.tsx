@@ -1,4 +1,3 @@
-import { Button } from "./Button";
 import { AiOutlineMenu } from "solid-icons/ai";
 import {
   FaBrandsGithub,
@@ -18,6 +17,7 @@ import {
   useContext,
 } from "solid-js";
 import type { IconProps } from "solid-icons";
+import { HeaderLink } from "./HeaderLink";
 
 const socials: {
   name: string;
@@ -83,18 +83,18 @@ export function Header() {
               showMenu() ? "flex" : "hidden"
             } w-full justify-between rounded-xl border-2 border-slate-200    bg-amber-400 p-2 dark:bg-slate-900 sm:top-0 sm:flex sm:w-auto sm:border-none`}
           >
-            <Button class="sm:mx-2" link="/work">
+            <HeaderLink class="sm:mx-2" link="/work">
               Did
-            </Button>
-            <Button class="sm:mx-2" link="/read">
+            </HeaderLink>
+            <HeaderLink class="sm:mx-2" link="/read">
               Read
-            </Button>
-            <Button class="sm:mx-2" link="/watched">
+            </HeaderLink>
+            <HeaderLink class="sm:mx-2" link="/watched">
               Watch
-            </Button>
-            <Button class="sm:mx-2" link="/study">
+            </HeaderLink>
+            <HeaderLink class="sm:mx-2" link="/study">
               Study
-            </Button>
+            </HeaderLink>
             <div class=" group prose  rounded-lg p-2 font-bold text-slate-900 duration-500 hover:bg-gray-800/20 dark:text-gray-300  dark:hover:bg-gray-800 sm:mx-2 sm:p-3 ">
               <div class="relative flex cursor-default">
                 Socials

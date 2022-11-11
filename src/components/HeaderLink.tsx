@@ -6,16 +6,14 @@ interface ButtonProps {
   link: string;
   class?: string;
 }
-export function Button(props: ButtonProps) {
+export function HeaderLink(props: ButtonProps) {
   const navigate = useNavigate();
   const match = useMatch(() => props.link);
 
   return (
-    <button
+    <a
       class={`rounded-lg  p-2 font-bold text-slate-900 transition-all duration-500   hover:bg-gray-800/20 dark:text-gray-300  dark:hover:bg-gray-800 sm:p-3 ${props.class}`}
-      onClick={() => {
-        navigate(props.link);
-      }}
+      href={props.link}
     >
       {props.children}
       <hr
@@ -25,6 +23,6 @@ export function Button(props: ButtonProps) {
             : "border-transparent"
         }`}
       />
-    </button>
+    </a>
   );
 }
