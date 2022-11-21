@@ -24,8 +24,13 @@ export default function Root() {
       <Head>
         <Title>Abdul Haidar</Title>
         <Meta charset="utf-8" />
+        <Meta content="Abdul Haidar" name="author" />
+        <Meta property="og:type" content="website" />
+        <Meta
+          name="description"
+          content="A front-end dev website and digital journal"
+        />
         <Meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="shortcut icon" type="image/ico" href="/favicon.ico" />
       </Head>
       <Body>
         <Suspense>
