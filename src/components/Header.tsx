@@ -6,7 +6,7 @@ import {
   FaBrandsTwitterSquare,
   FaBrandsYoutube,
 } from "solid-icons/fa";
-import { A, Link } from "solid-start";
+import { A } from "solid-start";
 import {
   createEffect,
   createSignal,
@@ -74,7 +74,7 @@ export function Header() {
                   : "border-dashed border-slate-900 bg-amber-400 text-slate-900 dark:border-gray-200 dark:bg-slate-900 dark:text-gray-200"
               }   rounded-lg `}
             >
-              <AiOutlineMenu class="svg-icon-header " />
+              <AiOutlineMenu size={20} />
             </button>
           </div>
 
