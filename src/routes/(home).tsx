@@ -40,27 +40,30 @@ export default function IndexPage() {
           "background-image": `url(${bgImg})`,
         }}
       >
-        <GridItem path={"/read"}>
+        <GridItem path={"/read"} class="col-span-2 sm:col-span-1">
           <h3 class={`text-yellow text-lg font-bold`}>What I like (to read)</h3>
           Books and articles that I found interesting and/or learned something
           from and would like to share
         </GridItem>
-        <GridItem path={"/watched"}>
+        {/* <GridItem path={"/watched"}>
           <h3 class={`text-yellow text-lg font-bold `}>
             What I like (to watch)
           </h3>
           Same as read, but for videos, courses and movies (should probably be
           the same list)
-        </GridItem>
+        </GridItem> */}
 
-        <GridItem path={"/study"}>
+        <GridItem class="col-span-2 sm:col-span-1" path={"/study"}>
           <h3 class="text-yellow text-lg font-bold">
             Material I rely on (to study)
           </h3>
           Repos, books, videos, courses related to computer science, enterprise,
           project management, design or career that I use as my guides
         </GridItem>
-        <GridItem path="https://github.com/abdulhdr1/website">
+        <GridItem
+          class="col-span-2"
+          path="https://github.com/abdulhdr1/website"
+        >
           <h3 class="text-yellow justify-center  text-lg font-bold">
             How I built this (code)
           </h3>

@@ -83,15 +83,15 @@ export function Header() {
               showMenu() ? "flex" : "hidden"
             } w-full justify-between rounded-xl border-2 border-slate-200    bg-amber-400 p-2 dark:bg-slate-900 sm:top-0 sm:flex sm:w-auto sm:border-none`}
           >
-            <HeaderLink class="sm:mx-2" link="/work">
+            {/* <HeaderLink class="sm:mx-2" link="/work">
               Did
-            </HeaderLink>
+            </HeaderLink> */}
             <HeaderLink class="sm:mx-2" link="/read">
               Read
             </HeaderLink>
-            <HeaderLink class="sm:mx-2" link="/watched">
+            {/* <HeaderLink class="sm:mx-2" link="/watched">
               Watch
-            </HeaderLink>
+            </HeaderLink> */}
             <HeaderLink class="sm:mx-2" link="/study">
               Study
             </HeaderLink>
