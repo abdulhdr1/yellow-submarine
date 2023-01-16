@@ -42,7 +42,7 @@ export default function IndexPage() {
 					"background-image": `url(${bgImg})`,
 				}}
 			>
-				<GridItem path={"/read"}>
+				<GridItem class="col-span-2 sm:col-span-1" path={"/read"}>
 					<h3 class={`text-yellow text-lg font-bold`}>
 						What I like (to read)
 					</h3>
@@ -57,7 +57,7 @@ export default function IndexPage() {
           the same list)
         </GridItem> */}
 
-				<GridItem path={"/study"}>
+				<GridItem class="col-span-2 sm:col-span-1" path={"/study"}>
 					<h3 class="text-yellow text-lg font-bold">
 						Material I rely on (to study)
 					</h3>
@@ -66,8 +66,8 @@ export default function IndexPage() {
 					as my guides
 				</GridItem>
 				<GridItem
-					path="https://github.com/abdulhdr1/website"
 					class="col-span-2"
+					path="https://github.com/abdulhdr1/website"
 				>
 					<h3 class="text-yellow justify-center  text-lg font-bold">
 						How I built this (code)
